@@ -1,0 +1,156 @@
+<title>Escultura dos Ventos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Figtree:wght@400;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one full-height gallery plinth; the model is the page, labels sit on it like a museum placard. Single dark look by choice. */
+:root {
+  --bg: #17130f;
+  --bg-2: #241c15;
+  --fg: #efe6da;
+  --muted: #a8998a;
+  --bronze: #c98a4f;
+  --line: #3a2e24;
+  --display: "Marcellus", "Georgia", serif;
+  --body: "Figtree", system-ui, -apple-system, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, monospace;
+  color-scheme: dark;
+}
+html, body { height: 100%; }
+body { background: var(--bg); color: var(--fg); font-family: var(--body); overflow: hidden; }
+.stage { position: relative; height: 100%; display: flex; flex-direction: column; }
+#view { flex: 1; min-height: 0; position: relative; background: radial-gradient(ellipse at 50% 38%, var(--bg-2) 0%, var(--bg) 70%); touch-action: none; }
+#view canvas { display: block; width: 100%; height: 100%; }
+.placard { position: absolute; top: 16px; left: 16px; right: 16px; pointer-events: none; display: flex; justify-content: space-between; gap: 12px; align-items: flex-start; }
+.placard h1 { font-family: var(--display); font-weight: 400; font-size: clamp(1.4rem, 4.5vw, 2.1rem); margin: 0; letter-spacing: 0.02em; text-wrap: balance; }
+.placard p { margin: 4px 0 0; color: var(--muted); font-size: 0.85rem; max-width: 34ch; line-height: 1.4; }
+.dims { font-family: var(--mono); font-size: 0.72rem; color: var(--muted); text-align: right; line-height: 1.6; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.dims b { color: var(--bronze); font-weight: 500; }
+.bar { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; padding: 12px 16px calc(14px + env(safe-area-inset-bottom, 0px)); border-top: 1px solid var(--line); background: var(--bg); }
+.bar button { font: 600 0.82rem var(--body); color: var(--fg); background: transparent; border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; cursor: pointer; letter-spacing: 0.02em; }
+.bar button[aria-pressed="true"] { border-color: var(--bronze); color: var(--bronze); }
+.bar button:focus-visible { outline: 2px solid var(--bronze); outline-offset: 2px; }
+.hint { position: absolute; bottom: 12px; left: 0; right: 0; text-align: center; font-size: 0.75rem; color: var(--muted); pointer-events: none; }
+[hidden] { display: none !important; }
+#load { position: absolute; inset: 0; display: grid; place-items: center; font-family: var(--mono); font-size: 0.8rem; color: var(--muted); pointer-events: none; }
+@media (max-width: 520px) { .placard { flex-direction: column; gap: 6px; } .placard p { display: none; } .dims { text-align: left; white-space: normal; } .dims br { display: none; } .dims span + span::before { content: " · "; } }
+</style>
+
+<div class="stage">
+  <div id="view">
+    <div class="placard">
+      <div>
+        <h1>Escultura dos Ventos</h1>
+        <p>Modelo 3D completo esculpido a partir da foto. Costas, cabelo, ondas e rosas de trás foram criados por interpretação.</p>
+      </div>
+      <div class="dims">
+        <span>altura <b>250 mm</b></span><br>
+        <span>largura <b>150 mm</b></span><br>
+        <span>profund. <b>111 mm</b></span><br>
+        <span>arquivo <b>.3mf</b></span>
+      </div>
+    </div>
+    <div id="load">carregando modelo…</div>
+    <div class="hint">arraste para girar · pinça para aproximar</div>
+  </div>
+  <div class="bar" role="toolbar" aria-label="Vistas">
+    <button id="b-front" type="button">Frente</button>
+    <button id="b-side" type="button">Lateral</button>
+    <button id="b-back" type="button">Costas</button>
+    <button id="b-face" type="button">Rosto</button>
+    <button id="b-spin" type="button" aria-pressed="true">Girar</button>
+    <button id="b-mat" type="button">Ver em PLA</button>
+  </div>
+</div>
+
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+} }
+</script>
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+
+const host = document.getElementById('view');
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.05;
+host.prepend(renderer.domElement);
+
+const scene = new THREE.Scene();
+const pmrem = new THREE.PMREMGenerator(renderer);
+scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+const key = new THREE.DirectionalLight(0xfff1e0, 2.4); key.position.set(-180, 320, 260); scene.add(key);
+const rim = new THREE.DirectionalLight(0x9fb8ff, 1.2); rim.position.set(220, 180, -260); scene.add(rim);
+
+const camera = new THREE.PerspectiveCamera(32, 1, 1, 5000);
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+controls.target.set(0, 125, 0);
+controls.minDistance = 60; controls.maxDistance = 1400;
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+controls.autoRotate = !reduce; controls.autoRotateSpeed = 1.1;
+
+const bronze = new THREE.MeshStandardMaterial({ color: 0xa8653a, metalness: 0.85, roughness: 0.36 });
+const pla = new THREE.MeshStandardMaterial({ color: 0x8c7b6b, metalness: 0.0, roughness: 0.62 });
+let mesh = null;
+
+// pedestal disc under the base
+const plinth = new THREE.Mesh(new THREE.CylinderGeometry(95, 98, 14, 96), new THREE.MeshStandardMaterial({ color: 0x2a211a, roughness: 0.9 }));
+plinth.position.y = -7; scene.add(plinth);
+
+function frame(az, el, dist, ty) {
+  const a = az * Math.PI / 180, e = el * Math.PI / 180;
+  controls.target.set(0, ty, 0);
+  camera.position.set(dist * Math.sin(a) * Math.cos(e), ty + dist * Math.sin(e), dist * Math.cos(a) * Math.cos(e));
+  controls.update();
+}
+function fitDist() { return camera.aspect < 0.8 ? 790 : 640; }
+function midY() { return camera.aspect < 0.8 ? 140 : 128; }
+
+const load = document.getElementById('load');
+const fail = () => { load.textContent = 'Não foi possível carregar o modelo. Recarregue a página.'; };
+const script = document.createElement('script');
+script.src = 'model.js';
+script.onload = () => {
+  const bin = Uint8Array.from(atob(window.MODEL_GLB), (c) => c.charCodeAt(0));
+  new GLTFLoader().parse(bin.buffer, '', (gltf) => {
+    gltf.scene.traverse((o) => { if (o.isMesh) { mesh = o; o.material = bronze; o.geometry.computeVertexNormals(); } });
+    scene.add(gltf.scene);
+    load.hidden = true;
+  }, fail);
+};
+script.onerror = fail;
+document.head.appendChild(script);
+
+function resize() {
+  const w = host.clientWidth, h = host.clientHeight;
+  renderer.setSize(w, h, false);
+  camera.aspect = w / h; camera.updateProjectionMatrix();
+}
+new ResizeObserver(resize).observe(host); resize();
+frame(-18, 10, fitDist(), midY());
+
+const spinBtn = document.getElementById('b-spin');
+function setSpin(on) { controls.autoRotate = on; spinBtn.setAttribute('aria-pressed', String(on)); }
+setSpin(!reduce);
+spinBtn.onclick = () => setSpin(!controls.autoRotate);
+document.getElementById('b-front').onclick = () => { setSpin(false); frame(0, 6, fitDist(), midY()); };
+document.getElementById('b-side').onclick = () => { setSpin(false); frame(90, 6, fitDist(), midY()); };
+document.getElementById('b-back').onclick = () => { setSpin(false); frame(180, 6, fitDist(), midY()); };
+document.getElementById('b-face').onclick = () => { setSpin(false); frame(-14, 6, 240, 196); };
+const matBtn = document.getElementById('b-mat');
+matBtn.onclick = () => {
+  if (!mesh) return;
+  const toPla = mesh.material === bronze;
+  mesh.material = toPla ? pla : bronze;
+  matBtn.textContent = toPla ? 'Ver em bronze' : 'Ver em PLA';
+};
+controls.addEventListener('start', () => setSpin(false));
+
+renderer.setAnimationLoop(() => { controls.update(); renderer.render(scene, camera); });
+</script>
