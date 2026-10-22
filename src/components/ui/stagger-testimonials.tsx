@@ -6,45 +6,48 @@ import { cn } from "@/lib/utils";
 
 const SQRT_5000 = Math.sqrt(5000);
 
-// Avaliações reais do Studio Caju (Google · 5,0 · 36 avaliações).
+// Depoimentos da Montanhal Estética.
+// ⚠️ PLACEHOLDER — substituir pelos depoimentos REAIS aprovados (Google/Instagram).
+// Apenas o primeiro é um trecho real coletado publicamente; os demais são exemplos.
 type Review = { tempId: number; quote: string; name: string; source: string };
 
 const reviews: Review[] = [
   {
     tempId: 0,
     quote:
-      "A Carol faz as unhas como ninguém: extremamente caprichosa, cuidadosa e atenciosa em cada detalhe. O resultado ficou impecável.",
-    name: "Amanda Santos",
-    source: "Google",
+      "O espaço é super aconchegante e o procedimento é impecável — ela te deixa segura e linda!",
+    name: "",
+    source: "Avaliação no Google",
   },
   {
     tempId: 1,
-    quote: "Unhas maravilhosas! A fibra de vidro é impecável — e o cabelo também!",
-    name: "Lore Angelo",
-    source: "Google",
+    quote:
+      "Atendimento maravilhoso e resultado que superou as expectativas. Saí me sentindo outra pessoa.",
+    name: "",
+    source: "Avaliação no Google",
   },
   {
     tempId: 2,
     quote:
-      "Meu lugar preferido para autocuidado, beleza e carinho! As melhores unhas de gel, pedicure e tratamento para cabelo.",
-    name: "Andreza Croitor",
-    source: "Google · Local Guide",
+      "Estrutura linda, equipe atenciosa e muita técnica. Virei cliente fiel da Montanhal!",
+    name: "",
+    source: "Avaliação no Google",
   },
   {
     tempId: 3,
-    quote: "Papo gostoso, ambiente acolhedor e aconchegante, cafezinho e música.",
+    quote: "A limpeza de pele é sensacional, minha pele nunca ficou tão boa.",
     name: "",
     source: "Avaliação no Google",
   },
   {
     tempId: 4,
-    quote: "Excelente profissional do ramo — unha masculina e feminina é top.",
+    quote: "O SPA é um momento à parte — relaxei de verdade. Ambiente impecável.",
     name: "",
     source: "Avaliação no Google",
   },
   {
     tempId: 5,
-    quote: "Estou amando minhas unhas, faz tudo com dedicação.",
+    quote: "Resultados reais no corporal e um cuidado que faz toda a diferença.",
     name: "",
     source: "Avaliação no Google",
   },
