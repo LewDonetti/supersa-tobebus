@@ -56,7 +56,7 @@ docs/                  proposta "Projeto do Site" (PDF + HTML-fonte)
 - **WhatsApp** `(11) 99668-8995`, **horário de funcionamento**, **nota/avaliações no Google** e **e-mail oficial** — ver `src/data/site.ts`.
 - **Serviços:** confirmar/ajustar a lista final em `src/data/services.ts`.
 - **Depoimentos:** substituir os placeholders pelos depoimentos **reais aprovados** (Google/Instagram).
-- **Fotos:** trocar os placeholders (gradientes) pelas fotos **reais** em alta — espaço (200m²/6 salas), SPA, procedimentos, Dra. Gabriela/equipe e **Antes & Depois** aprovados.
+- **Fotos:** hero, espaço, SPA e procedimentos (facial/corporal/injetáveis) já aplicados. Ainda **pendentes** (usar fotos reais): `equipe.webp` (Dra. Gabriela/equipe) e os **Antes & Depois** reais (`ba-facial.webp`, `ba-corporal.webp`).
 - **Formulário:** criar chave gratuita no [web3forms.com](https://web3forms.com) com o e-mail da clínica e definir `NEXT_PUBLIC_WEB3FORMS_KEY` para receber leads por e-mail (o WhatsApp já funciona).
 
 ## Deploy (Vercel)
