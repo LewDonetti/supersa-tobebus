@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<title>Montanhal Estética — Documentação do site</title>
+<style>
+  :root{ --gold:#C9A24B; --gold-deep:#A67C1E; --ink:#2b2724; --muted:#6f665b; --line:#E6D9BE; }
+  *{box-sizing:border-box}
+  html{font-family:-apple-system,"Segoe UI","DejaVu Sans",Arial,sans-serif;color:var(--ink);font-size:11.5pt;line-height:1.6}
+  body{margin:0;padding:4mm 2mm}
+  .kicker{color:var(--gold-deep);font-weight:700;letter-spacing:3px;font-size:9.5pt;text-transform:uppercase}
+  h1{font-family:Georgia,"DejaVu Serif",serif;font-size:30pt;margin:2px 0 4px;color:var(--ink)}
+  .rule{height:4px;width:70px;background:var(--gold);border-radius:3px;margin:8px 0 4px}
+  .lead{color:var(--muted);max-width:150mm}
+  h2{font-family:Georgia,"DejaVu Serif",serif;font-size:16pt;margin:26px 0 2px;color:var(--ink)}
+  h2+.hr{height:2px;background:linear-gradient(90deg,var(--gold),transparent);margin:0 0 8px}
+  p{margin:7px 0}
+  ul{margin:6px 0 6px 2px;padding-left:20px}
+  li{margin:5px 0}
+  b{color:var(--ink)}
+  code{background:#F4ECDA;border:1px solid var(--line);border-radius:4px;padding:1px 6px;font-size:10pt}
+  a{color:var(--gold-deep)}
+  .foot{margin-top:28px;border-top:1px solid var(--line);padding-top:10px;color:var(--muted);font-size:9.5pt}
+</style>
+</head>
+<body>
+  <div class="kicker">Clínica Montanhal Estética · Estética</div>
+  <h1>Documentação do site</h1>
+  <div class="rule"></div>
+  <p class="lead">Resumo do site da Montanhal Estética (facial, corporal, injetáveis e SPA), como ele funciona e como mantê-lo. Para quem não é da área técnica.</p>
+
+  <h2>Visão geral</h2><div class="hr"></div>
+  <p>Site institucional da clínica, focado em apresentar os serviços e a experiência e em <b>captar clientes</b>. Rápido, moderno e perfeito no celular, que é por onde a maioria das clientes chega (vindas do Instagram).</p>
+  <p><b>Status atual:</b> site em análise (ainda não publicado). Quando for aprovado, é só hospedar e divulgar o link.</p>
+
+  <h2>Seções do site</h2><div class="hr"></div>
+  <ul>
+    <li><b>Topo (Hero):</b> apresentação da marca e chamada para agendamento.</li>
+    <li><b>Sobre:</b> história da clínica, a Dra. Gabriela e os diferenciais (200m², 6 salas, SPA).</li>
+    <li><b>Serviços:</b> estética facial, corporal e injetáveis, com descrições e fotos.</li>
+    <li><b>SPA Montanhal:</b> a experiência de bem-estar da clínica.</li>
+    <li><b>Resultados (Antes &amp; Depois):</b> espaço para fotos reais de transformações (a adicionar quando houver as imagens aprovadas).</li>
+    <li><b>Depoimentos:</b> avaliações de clientes em destaque.</li>
+    <li><b>Contato / Captação:</b> formulário e botão de WhatsApp para a cliente falar na hora.</li>
+    <li><b>Rodapé:</b> contato, redes sociais e informações.</li>
+  </ul>
+
+  <h2>Funcionalidades</h2><div class="hr"></div>
+  <ul>
+    <li><b>Captação de clientes:</b> formulário e WhatsApp para agendar/consultar na hora.</li>
+    <li><b>Responsivo:</b> pensado primeiro para o celular.</li>
+    <li><b>Animações:</b> transições suaves e profissionais (sem exagero).</li>
+    <li><b>Preparado para o Google (SEO):</b> para ser encontrado por quem busca estética na região.</li>
+  </ul>
+
+  <h2>Tecnologia e hospedagem</h2><div class="hr"></div>
+  <p>Construído com <b>Next.js + Tailwind CSS + shadcn/ui</b> e animações com <b>Framer Motion</b>. Ainda não hospedado — pode ir para a <b>Vercel</b> (indicado para Next.js) ou outro serviço, de forma gratuita.</p>
+
+  <h2>Como atualizar ou publicar</h2><div class="hr"></div>
+  <ul>
+    <li><b>Mexer no site:</b> abrir a pasta do código, rodar <code>npm install</code> e depois <code>npm run dev</code> para ver as mudanças ao vivo.</li>
+    <li><b>Conteúdo rápido:</b> contatos e marca ficam em <code>src/data/site.ts</code>; serviços em <code>src/data/services.ts</code>; cores e fontes em <code>src/app/globals.css</code>.</li>
+    <li><b>Publicar:</b> conectar o repositório do GitHub à Vercel e publicar com um clique (a Vercel monta tudo sozinha).</li>
+  </ul>
+
+  <h2>O que ainda falta (da cliente)</h2><div class="hr"></div>
+  <ul>
+    <li>Confirmar <b>WhatsApp</b>, <b>horário</b>, <b>nota do Google</b> e <b>e-mail</b>.</li>
+    <li><b>Fotos reais</b> em alta: espaço/SPA, procedimentos, Dra. Gabriela/equipe e Antes &amp; Depois.</li>
+    <li><b>Depoimentos reais</b> aprovados.</li>
+  </ul>
+
+  <h2>Links</h2><div class="hr"></div>
+  <ul>
+    <li>Código no GitHub: <a href="https://github.com/LewDonetti/supersa-tobebus">github.com/LewDonetti/supersa-tobebus</a></li>
+  </ul>
+
+  <div class="foot">Documentação do site da Clínica Montanhal Estética — Facial, Corporal, Injetáveis &amp; SPA.</div>
+</body>
+</html>
